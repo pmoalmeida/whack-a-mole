@@ -1,4 +1,4 @@
-Whack-a-mole
+# Whack-a-mole
 
 ## Available Scripts
 
