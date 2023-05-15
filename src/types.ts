@@ -1,7 +1,7 @@
 export type Player = {
-  score: number;
-  name: string;
-};
+  score: number
+  name: string
+}
 
 export enum GAMESTEPS {
   INITIAL = -1,

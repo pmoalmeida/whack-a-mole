@@ -13,17 +13,26 @@ import { incrementScore } from '../../store/slices/playerSlice'
 import { useGenerateNumber } from '../../hooks/useGenerateNumber'
 // @ts-ignore
 import boing from '../../assets/sounds/boing.mp3'
+// @ts-ignore
+import gameOver from '../../assets/sounds/game-over.wav'
 import { useGameTime } from '../../hooks/useGameTime'
 import { GAME_DIFFICULTY } from '../../config'
+import { saveScore } from '../../api/saveScore'
 
 export default function Game() {
   const boingAudio = new Audio(boing)
+  const gameOverAudio = new Audio(gameOver)
   const player: Player = useSelector((state: RootState) => state.player)
   const difficulty: GAME_DIFFICULTY = useSelector((state: RootState) => state.game.difficulty)
   const generatedNumber: number = useSelector((state: RootState) => state.game.activeNumber)
   const dispatch = useDispatch()
 
-  const { runTimer, countDown } = useGameTime()
+  const onFinishGame = async () => {
+    gameOverAudio.play()
+    await saveScore(player)
+  }
+
+  const { runTimer, countDown } = useGameTime(onFinishGame)
 
   useGenerateNumber(runTimer, difficulty, dispatch)
 
@@ -61,6 +70,7 @@ export default function Game() {
               .map((_, i) => (
                 <Grid
                   item
+                  key={`grid-${i}`}
                   onClick={() => {
                     if (i === generatedNumber) {
                       boingAudio.play()

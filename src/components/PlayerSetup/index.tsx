@@ -58,6 +58,18 @@ export default function PlayerSetup() {
             Play now!
           </Button>
         </Grid>
+        <Grid item xs={12}>
+          <Button
+            fullWidth
+            variant="contained"
+            size="large"
+            onClick={() => {
+              dispatch(setStep(GAMESTEPS.INITIAL))
+            }}
+          >
+            BACK TO HOME
+          </Button>
+        </Grid>
       </Grid>
     </Layout>
   )
