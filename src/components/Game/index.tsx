@@ -66,14 +66,14 @@ export default function Game() {
             cursor: `url(${hammer}), pointer`,
           }}
         >
-          <Grid container rowSpacing={12} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid container={true} rowSpacing={12} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             {Array(12)
               .fill(true)
               .map((_, i) => {
                 const isActive = i === generatedNumber
                 return (
                   <Grid
-                    item
+                    item={true}
                     key={`grid-${i}`}
                     onClick={() => {
                       if (isActive) {
@@ -101,10 +101,10 @@ export default function Game() {
         <ResultWrapper>
           <p>Thank you for playing, {player.name}</p>
           <p>Time is off, you scored a total of {player.score} points!</p>
-          <Grid container spacing={1}>
-            <Grid item xs={12}>
+          <Grid container={true} spacing={1}>
+            <Grid item={true} xs={12}>
               <Button
-                fullWidth
+                fullWidth={true}
                 variant="contained"
                 size="large"
                 onClick={() => {
@@ -114,9 +114,9 @@ export default function Game() {
                 PLAY AGAIN
               </Button>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item={true} xs={12}>
               <Button
-                fullWidth
+                fullWidth={true}
                 variant="contained"
                 size="large"
                 onClick={() => {
@@ -126,9 +126,9 @@ export default function Game() {
                 LEADERBOARD
               </Button>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item={true} xs={12}>
               <Button
-                fullWidth
+                fullWidth={true}
                 variant="contained"
                 size="large"
                 onClick={() => {
