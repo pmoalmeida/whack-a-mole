@@ -1,30 +1,30 @@
-import React from 'react';
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './store';
-import { GAMESTEPS } from './types';
-import Game from './components/Game';
-import Leaderboard from './components/Leaderboard';
-import { Box, Button, Grid, Typography } from '@mui/material';
-import { setStep } from './store/slices/playerSlice';
-import PlayerSetup from './components/PlayerSetup';
-import Layout from './components/Layout';
+import React from 'react'
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from './store'
+import { GAMESTEPS } from './types'
+import Game from './components/Game'
+import Leaderboard from './components/Leaderboard'
+import { Box, Button, Grid, Typography } from '@mui/material'
+import PlayerSetup from './components/PlayerSetup'
+import Layout from './components/Layout'
+import { setStep } from './store/slices/gameSlice'
 
 function App() {
-  const step: GAMESTEPS = useSelector((state: RootState) => state.player.step);
-  const dispatch = useDispatch();
+  const step: GAMESTEPS = useSelector((state: RootState) => state.game.step)
+  const dispatch = useDispatch()
 
   function renderStep(step: GAMESTEPS) {
     switch (step) {
       case GAMESTEPS.GAME:
-        return <Game />;
+        return <Game />
       case GAMESTEPS.PLAYER_SETUP:
-        return <PlayerSetup />;
+        return <PlayerSetup />
       case GAMESTEPS.LEADERBOARD:
-        return <Leaderboard />;
+        return <Leaderboard />
       default:
         return (
           <Layout>
@@ -40,7 +40,7 @@ function App() {
                   variant="contained"
                   size="large"
                   onClick={() => {
-                    dispatch(setStep(GAMESTEPS.PLAYER_SETUP));
+                    dispatch(setStep(GAMESTEPS.PLAYER_SETUP))
                   }}
                 >
                   PLAY
@@ -52,7 +52,7 @@ function App() {
                   variant="contained"
                   size="large"
                   onClick={() => {
-                    dispatch(setStep(GAMESTEPS.LEADERBOARD));
+                    dispatch(setStep(GAMESTEPS.LEADERBOARD))
                   }}
                 >
                   LEADERBOARD
@@ -60,11 +60,11 @@ function App() {
               </Grid>
             </Grid>
           </Layout>
-        );
+        )
     }
   }
 
-  return renderStep(step);
+  return renderStep(step)
 }
 
-export default App;
+export default App

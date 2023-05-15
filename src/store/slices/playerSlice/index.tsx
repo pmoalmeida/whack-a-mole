@@ -1,16 +1,14 @@
-import { GAMESTEPS } from '../../types'
-import InitialState, { UpdatePlayerSlice } from '../types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import InitialState, { UpdatePlayerSlice } from './types'
 
 const initialState: InitialState = {
   score: 0,
   name: '',
-  step: GAMESTEPS.INITIAL,
 }
 
 export const playerSlice = createSlice({
   name: UpdatePlayerSlice,
-  initialState: initialState,
+  initialState,
   reducers: {
     resetScore: (state) => {
       state.score = 0
@@ -21,11 +19,8 @@ export const playerSlice = createSlice({
     setPlayerName: (state, action: PayloadAction<string>) => {
       state.name = action.payload
     },
-    setStep: (state, action: PayloadAction<GAMESTEPS>) => {
-      state.step = action.payload
-    },
   },
 })
 
-export const { incrementScore, setPlayerName, setStep, resetScore } = playerSlice.actions
+export const { incrementScore, setPlayerName, resetScore } = playerSlice.actions
 export default playerSlice.reducer

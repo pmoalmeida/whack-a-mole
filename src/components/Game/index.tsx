@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { GAMESTEPS, Player } from '../../types'
@@ -8,44 +8,22 @@ import hole from '../../assets/WAM_Hole.png'
 import mole from '../../assets/WAM_Mole.png'
 import hammer from '../../assets/hammer.png'
 import Modal from '../Modal'
-import { incrementScore, setStep } from '../../store/slices/playerSlice'
+import { setActiveNumber, setStep } from '../../store/slices/gameSlice'
+import { incrementScore } from '../../store/slices/playerSlice'
 import { useGenerateNumber } from '../../hooks/useGenerateNumber'
-//@ts-ignore
+// @ts-ignore
 import boing from '../../assets/sounds/boing.mp3'
-//@ts-ignore
-import gameOver from '../../assets/sounds/game-over.wav'
+import { useGameTime } from '../../hooks/useGameTime'
 
 export default function Game() {
+  const boingAudio = new Audio(boing)
   const player: Player = useSelector((state: RootState) => state.player)
-  console.log('player', player)
+  const generatedNumber: number = useSelector((state: RootState) => state.game.activeNumber)
   const dispatch = useDispatch()
-  const [countDown, setCountDown] = useState(0)
-  const [runTimer, setRunTimer] = useState(true)
 
-  useEffect(() => {
-    let timerId: NodeJS.Timer
+  const { runTimer, countDown } = useGameTime()
 
-    if (runTimer) {
-      setCountDown(60 * 0.3)
-      timerId = setInterval(() => {
-        setCountDown((countDown) => countDown - 1)
-      }, 1000)
-    } else {
-      //@ts-ignore
-      clearInterval(timerId)
-    }
-
-    return () => clearInterval(timerId)
-  }, [runTimer])
-
-  useEffect(() => {
-    if (countDown < 0 && runTimer) {
-      setRunTimer(false)
-      setCountDown(0)
-      new Audio(gameOver).play()
-    }
-  }, [countDown, runTimer])
-  const generatedNumber = useGenerateNumber(runTimer)
+  useGenerateNumber(runTimer, dispatch)
 
   const seconds = String(countDown % 60).padStart(2, '0')
   const minutes = String(Math.floor(countDown / 60)).padStart(2, '0')
@@ -83,8 +61,9 @@ export default function Game() {
                   item
                   onClick={() => {
                     if (i === generatedNumber) {
-                      new Audio(boing).play()
+                      boingAudio.play()
                       dispatch(incrementScore())
+                      dispatch(setActiveNumber(-1))
                     }
                   }}
                   xs={4}

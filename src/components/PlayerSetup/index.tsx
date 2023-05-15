@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { resetScore, setPlayerName, setStep } from '../../store/slices/playerSlice'
+import { resetScore, setPlayerName } from '../../store/slices/playerSlice'
+import { setStep } from '../../store/slices/gameSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { GAMESTEPS, Player } from '../../types'
@@ -9,7 +10,7 @@ import Layout from '../Layout'
 export default function PlayerSetup() {
   const player: Player = useSelector((state: RootState) => state.player)
   const [name, setName] = useState(player.name)
-  console.log('player', player)
+  const [error, setError] = useState(false)
   const dispatch = useDispatch()
   return (
     <Layout>
@@ -22,7 +23,12 @@ export default function PlayerSetup() {
         <Grid item xs={12}>
           <TextField
             id="playerName"
-            onChange={(e) => setName(e.target.value)}
+            error={error}
+            helperText={!!error ? 'Please choose a name' : ''}
+            onChange={(e) => {
+              setError(!e.target.value)
+              setName(e.target.value)
+            }}
             label="Player name"
             variant="outlined"
             defaultValue={name}
@@ -36,9 +42,13 @@ export default function PlayerSetup() {
             variant="contained"
             size="medium"
             onClick={() => {
-              dispatch(resetScore())
-              dispatch(setPlayerName(name))
-              dispatch(setStep(GAMESTEPS.GAME))
+              if (name) {
+                dispatch(resetScore())
+                dispatch(setPlayerName(name))
+                dispatch(setStep(GAMESTEPS.GAME))
+              } else {
+                setError(true)
+              }
             }}
           >
             Play now!
