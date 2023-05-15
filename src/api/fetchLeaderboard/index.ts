@@ -1,13 +1,7 @@
 import axios from 'axios'
 import { API_KEY, API_URL } from '../../config/api'
 import { Player } from '../../types'
-import { ApiRecord } from '../types'
-
-const transformLeaderboardData = (records: ApiRecord[]) =>
-  records.map((record) => ({
-    name: record.fields.Name,
-    score: record.fields.Score,
-  }))
+import { transformLeaderboardData } from '../../utils'
 
 /*
    This data is coming sorted by the BE service by default
@@ -18,13 +12,12 @@ export const fetchLeaderboard = async (): Promise<{
   records?: Player[]
   error?: Error
 }> =>
-  await axios({
-    method: 'get',
-    url: `${API_URL}?maxRecords=10&view=Leaderboard`,
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
-    },
-  })
+  await axios
+    .get(`${API_URL}?maxRecords=10&view=Leaderboard`, {
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+      },
+    })
     .then((r) => {
       return { success: true, records: transformLeaderboardData(r.data.records) }
     })

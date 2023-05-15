@@ -4,6 +4,9 @@ import { Dispatch } from '@reduxjs/toolkit'
 import { setActiveNumber } from '../store/slices/gameSlice'
 import { DIFFICULTY_INTERVALS, GAME_DIFFICULTY } from '../config'
 
+/*  
+Depending on the game difficulty the player has chosen in the setup, the random number generator will be faster/slower
+*/
 export const useGenerateNumber = (
   isActive: boolean,
   difficulty: GAME_DIFFICULTY,

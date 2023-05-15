@@ -12,6 +12,6 @@ export const DIFFICULTY_INTERVALS = {
     generateInterval: 2000,
   },
   [GAME_DIFFICULTY.HARD]: {
-    generateInterval: 1000,
+    generateInterval: 900,
   },
 }

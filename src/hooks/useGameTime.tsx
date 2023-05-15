@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react'
 
-export const useGameTime = (onFinishGame: () => {}) => {
+export const useGameTime = (onFinishGame: () => void) => {
   const [countDown, setCountDown] = useState<number>(0)
   const [runTimer, setRunTimer] = useState(true)
 
   useEffect(() => {
-    let timerId: NodeJS.Timer
+    let timerId: NodeJS.Timer | undefined
 
     if (runTimer) {
-      setCountDown(60 * 2)
+      setCountDown(60 * 2) // 2 minutes is the time that the game should be running
       timerId = setInterval(() => {
         setCountDown((ctd) => ctd - 1)
       }, 1000)
     } else {
-      //@ts-ignore
       clearInterval(timerId)
     }
 

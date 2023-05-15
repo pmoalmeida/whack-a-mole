@@ -13,14 +13,13 @@ export const saveScore = async ({ name, score }: Player) => {
       },
     ],
   }
-  return await axios({
-    method: 'post',
-    url: API_URL,
-    data: payload,
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
-    },
-  })
+
+  return await axios
+    .post(API_URL, payload, {
+      headers: {
+        Authorization: `Bearer ${API_KEY}`,
+      },
+    })
     .then((r) => {
       return { success: true }
     })
