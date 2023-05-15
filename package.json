@@ -38,6 +38,13 @@
       "react-app/jest"
     ]
   },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/index.ts",
+      "<rootDir>/src/reportWebVitals.ts",
+      "<rootDir>/src/config/api.ts"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",

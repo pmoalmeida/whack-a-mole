@@ -104,4 +104,76 @@ describe('Game', () => {
       }
     )
   })
+
+  it('should redirect to player setup when clicking on play again within the game over modal', async () => {
+    mockAxios.post.mockResolvedValue({})
+
+    const { store } = renderGame()
+
+    act(() => jest.advanceTimersByTime(3000))
+
+    expect(screen.queryByAltText('Mole')).toBeVisible()
+
+    act(() => screen.getByAltText('Mole').click())
+
+    act(() => jest.advanceTimersByTime(120000))
+
+    expect(store.getState().player.score).toBe(100)
+    expect(screen.getByText('PLAY AGAIN', { selector: 'button' })).toBeVisible()
+
+    screen.getByText('PLAY AGAIN', { selector: 'button' }).click()
+
+    expect(store.getState().game.step).toEqual(0)
+  })
+
+  it('should redirect to leaderboard step when clicking on play again within the game over modal', async () => {
+    mockAxios.post.mockResolvedValue({})
+    const mockRecord = {
+      id: 'idRecord',
+      fields: {
+        Name: 'Test Name',
+        Score: 200,
+      },
+    }
+    const resp = { data: { records: [mockRecord] } }
+    mockAxios.get.mockResolvedValue(resp)
+
+    const { store } = renderGame()
+
+    act(() => jest.advanceTimersByTime(3000))
+
+    expect(screen.queryByAltText('Mole')).toBeVisible()
+
+    act(() => screen.getByAltText('Mole').click())
+
+    act(() => jest.advanceTimersByTime(120000))
+
+    expect(store.getState().player.score).toBe(100)
+    expect(screen.getByText('LEADERBOARD', { selector: 'button' })).toBeVisible()
+
+    screen.getByText('LEADERBOARD', { selector: 'button' }).click()
+
+    expect(store.getState().game.step).toEqual(2)
+  })
+
+  it('should redirect to the initial step when clicking on play again within the game over modal', async () => {
+    mockAxios.post.mockResolvedValue({})
+
+    const { store } = renderGame()
+
+    act(() => jest.advanceTimersByTime(3000))
+
+    expect(screen.queryByAltText('Mole')).toBeVisible()
+
+    act(() => screen.getByAltText('Mole').click())
+
+    act(() => jest.advanceTimersByTime(120000))
+
+    expect(store.getState().player.score).toBe(100)
+    expect(screen.getByText('BACK TO HOME', { selector: 'button' })).toBeVisible()
+
+    screen.getByText('BACK TO HOME', { selector: 'button' }).click()
+
+    expect(store.getState().game.step).toEqual(-1)
+  })
 })

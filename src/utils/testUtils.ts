@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import gameReducer from '../store/slices/gameSlice'
 import playerReducer from '../store/slices/playerSlice'
 
-function buildStore() {
+function buildStore(gamePayload = {}) {
   const store = configureStore({
     reducer: {
       game: gameReducer,
