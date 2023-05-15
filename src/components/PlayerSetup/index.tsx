@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
-import {
-  incrementScore,
-  setPlayerName,
-  setStep,
-} from '../../store/slices/playerSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
-import { GAMESTEPS, Player } from '../../types';
-import { Box, Button, Grid, TextField, Typography } from '@mui/material';
-import Layout from '../Layout';
+import React, { useState } from 'react'
+import { resetScore, setPlayerName, setStep } from '../../store/slices/playerSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../../store'
+import { GAMESTEPS, Player } from '../../types'
+import { Box, Button, Grid, TextField, Typography } from '@mui/material'
+import Layout from '../Layout'
 
 export default function PlayerSetup() {
-  const player: Player = useSelector((state: RootState) => state.player);
-  const [name, setName] = useState('');
-  console.log('player', player);
-  const dispatch = useDispatch();
+  const player: Player = useSelector((state: RootState) => state.player)
+  const [name, setName] = useState(player.name)
+  console.log('player', player)
+  const dispatch = useDispatch()
   return (
     <Layout>
       <Box>
@@ -29,6 +25,7 @@ export default function PlayerSetup() {
             onChange={(e) => setName(e.target.value)}
             label="Player name"
             variant="outlined"
+            defaultValue={name}
             margin="normal"
             fullWidth
           />
@@ -39,8 +36,9 @@ export default function PlayerSetup() {
             variant="contained"
             size="medium"
             onClick={() => {
-              dispatch(setPlayerName(name));
-              dispatch(setStep(GAMESTEPS.GAME));
+              dispatch(resetScore())
+              dispatch(setPlayerName(name))
+              dispatch(setStep(GAMESTEPS.GAME))
             }}
           >
             Play now!
@@ -48,5 +46,5 @@ export default function PlayerSetup() {
         </Grid>
       </Grid>
     </Layout>
-  );
+  )
 }
