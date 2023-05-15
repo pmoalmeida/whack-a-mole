@@ -30,6 +30,7 @@ export default function PlayerSetup() {
               setError(!e.target.value)
               setName(e.target.value)
             }}
+            name="playerName"
             label="Player name"
             variant="outlined"
             defaultValue={name}
@@ -55,7 +56,7 @@ export default function PlayerSetup() {
               }
             }}
           >
-            Play now!
+            PLAY NOW!
           </Button>
         </Grid>
         <Grid item={true} xs={12}>

@@ -69,7 +69,7 @@ export default function Leaderboard() {
   return (
     <Layout>
       <Box>
-        <Typography variant="h2" paragraph={true}>
+        <Typography variant="h2" paragraph={true} aria-label="leaderboard">
           Leaderboard
         </Typography>
       </Box>

@@ -3,3 +3,18 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom'
+
+window.HTMLMediaElement.prototype.load = () => {
+  /* do nothing */
+}
+// @ts-ignore
+window.HTMLMediaElement.prototype.play = () => {
+  /* do nothing */
+}
+window.HTMLMediaElement.prototype.pause = () => {
+  /* do nothing */
+}
+// @ts-ignore
+window.HTMLMediaElement.prototype.addTextTrack = () => {
+  /* do nothing */
+}
