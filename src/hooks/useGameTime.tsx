@@ -8,7 +8,7 @@ export const useGameTime = (onFinishGame: () => {}) => {
     let timerId: NodeJS.Timer
 
     if (runTimer) {
-      setCountDown(60 * 1) //TODO
+      setCountDown(60 * 2)
       timerId = setInterval(() => {
         setCountDown((ctd) => ctd - 1)
       }, 1000)

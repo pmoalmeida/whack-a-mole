@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import bg from '../../assets/WAM_bg.jpg';
+import styled from 'styled-components'
+import bg from '../../assets/WAM_bg.jpg'
 
 export const GameWrapper = styled.div`
   background-image: url(${bg});
@@ -12,27 +12,36 @@ export const GameWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-`;
+`
 
-export const ScoreLabel = styled.span`
+export const RedBoldLabel = styled.span`
   font-weight: bold;
   font-size: xx-large;
   color: red;
   -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: black;
-`;
+`
 
-export const Score = styled.span`
+export const BoldLabel = styled.span`
   font-weight: bold;
   font-size: xx-large;
   color: black;
   -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: white;
-`;
+`
 
-export const ScoreWrapper = styled.div`
+export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
   gap: 1rem;
-`;
+`
+
+export const ResultWrapper = styled.div`
+  padding: 2rem;
+`
+
+export const GameHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`

@@ -3,7 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store'
 import { GAMESTEPS, Player } from '../../types'
 import { Button, Container, Grid } from '@mui/material'
-import { GameWrapper, Score, ScoreLabel, ScoreWrapper } from './style'
+import {
+  GameWrapper,
+  RedBoldLabel,
+  BoldLabel,
+  InfoWrapper,
+  ResultWrapper,
+  GameHeader,
+} from './style'
 import hole from '../../assets/WAM_Hole.png'
 import mole from '../../assets/WAM_Mole.png'
 import hammer from '../../assets/hammer.png'
@@ -42,23 +49,18 @@ export default function Game() {
   return (
     <>
       <GameWrapper>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
-          <ScoreWrapper>
-            <ScoreLabel>Score</ScoreLabel>
-            <Score>{player.score}</Score>
-          </ScoreWrapper>
-          <ScoreWrapper>
-            <Score>Time remaining</Score>
-            <Score>
+        <GameHeader>
+          <InfoWrapper>
+            <RedBoldLabel>Score</RedBoldLabel>
+            <BoldLabel>{player.score}</BoldLabel>
+          </InfoWrapper>
+          <InfoWrapper>
+            <BoldLabel>Time remaining</BoldLabel>
+            <BoldLabel>
               {minutes}:{seconds}
-            </Score>
-          </ScoreWrapper>
-        </div>
+            </BoldLabel>
+          </InfoWrapper>
+        </GameHeader>
         <Container
           sx={{
             cursor: `url(${hammer}), pointer`,
@@ -87,7 +89,7 @@ export default function Game() {
         </Container>
       </GameWrapper>
       <Modal title="Game over" open={!runTimer}>
-        <div style={{ padding: '2rem' }}>
+        <ResultWrapper>
           <p>Thank you for playing, {player.name}</p>
           <p>Time is off, you scored a total of {player.score} points!</p>
           <Grid container spacing={1}>
@@ -128,7 +130,7 @@ export default function Game() {
               </Button>
             </Grid>
           </Grid>
-        </div>
+        </ResultWrapper>
       </Modal>
     </>
   )
