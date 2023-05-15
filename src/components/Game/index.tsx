@@ -89,7 +89,7 @@ export default function Game() {
                       height="100"
                       src={isActive ? mole : hole}
                       key={`image-${i}`}
-                      alt={isActive ? 'Mole' : 'Hole'}
+                      alt={isActive ? 'Mole' : `Hole-${i}`}
                     />
                   </Grid>
                 )

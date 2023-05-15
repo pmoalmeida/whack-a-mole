@@ -29,7 +29,7 @@ function App() {
         return (
           <Layout>
             <Box>
-              <Typography variant="h1" paragraph={true}>
+              <Typography variant="h1" paragraph={true} aria-label="Title">
                 Whack-a-mole!
               </Typography>
             </Box>

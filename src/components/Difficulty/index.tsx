@@ -33,12 +33,22 @@ export default function Difficulty() {
       >
         <FormControlLabel
           value={GAME_DIFFICULTY.EASY}
+          name="easy"
           control={<Radio />}
-          //   onChange={(e) => console.log(e)}
           label="Easy"
         />
-        <FormControlLabel value={GAME_DIFFICULTY.NORMAL} control={<Radio />} label="Normal" />
-        <FormControlLabel value={GAME_DIFFICULTY.HARD} control={<Radio />} label="Hard" />
+        <FormControlLabel
+          name="normal"
+          value={GAME_DIFFICULTY.NORMAL}
+          control={<Radio />}
+          label="Normal"
+        />
+        <FormControlLabel
+          name="hard"
+          value={GAME_DIFFICULTY.HARD}
+          control={<Radio />}
+          label="Hard"
+        />
       </RadioGroup>
     </FormControl>
   )
