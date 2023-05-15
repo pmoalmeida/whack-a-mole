@@ -36,7 +36,7 @@ export default function Game() {
 
   const onFinishGame = async () => {
     gameOverAudio.play()
-    await saveScore(player)
+    if (player.score > 0) await saveScore(player)
   }
 
   const { runTimer, countDown } = useGameTime(onFinishGame)

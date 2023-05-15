@@ -1,5 +1,5 @@
-import { Box, Container } from '@mui/material';
-import React, { ReactNode } from 'react';
+import { Box, Container } from '@mui/material'
+import React, { ReactNode } from 'react'
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -16,5 +16,5 @@ export default function Layout({ children }: { children: ReactNode }) {
         {children}
       </Container>
     </Box>
-  );
+  )
 }
