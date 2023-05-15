@@ -1,8 +1,9 @@
-import { act, fireEvent, render, screen } from '@testing-library/react'
+import { act, render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import Game from '.'
 import { buildStore } from '../../utils/testUtils'
 import mockAxios from 'jest-mock-axios'
+import { API_KEY, API_URL } from '../../config/api'
 
 function renderGame() {
   const store = buildStore()
@@ -39,10 +40,6 @@ describe('Game', () => {
       .forEach((_, i) => {
         expect(screen.queryByAltText(`Hole-${i}`)).toBeVisible()
       })
-
-    // expect(screen.getByText('PLAY AGAIN', { selector: 'button' })).toBeVisible()
-    // expect(screen.getByText('LEADERBOARD', { selector: 'button' })).toBeVisible()
-    // expect(screen.getByText('BACK TO HOME', { selector: 'button' })).toBeVisible()
   })
 
   it('should increment score when hitting on a mole', async () => {
@@ -78,8 +75,9 @@ describe('Game', () => {
     expect(screen.getByText('BACK TO HOME', { selector: 'button' })).toBeVisible()
     expect(mockAxios.post).not.toHaveBeenCalled()
   })
-  it.skip('should present the game over modal when time runs out and save the score', async () => {
-    //TODO
+  it('should present the game over modal when time runs out and save the score', async () => {
+    mockAxios.post.mockResolvedValue({})
+
     const { store } = renderGame()
 
     act(() => jest.advanceTimersByTime(3000))
@@ -94,6 +92,16 @@ describe('Game', () => {
     expect(screen.getByText('PLAY AGAIN', { selector: 'button' })).toBeVisible()
     expect(screen.getByText('LEADERBOARD', { selector: 'button' })).toBeVisible()
     expect(screen.getByText('BACK TO HOME', { selector: 'button' })).toBeVisible()
-    expect(mockAxios.post).toHaveBeenCalledWith('')
+    expect(mockAxios.post).toHaveBeenCalledWith(
+      API_URL,
+      {
+        records: [{ fields: { Name: '', Score: 100 } }],
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${API_KEY}`,
+        },
+      }
+    )
   })
 })
