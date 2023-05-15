@@ -69,22 +69,31 @@ export default function Game() {
           <Grid container rowSpacing={12} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             {Array(12)
               .fill(true)
-              .map((_, i) => (
-                <Grid
-                  item
-                  key={`grid-${i}`}
-                  onClick={() => {
-                    if (i === generatedNumber) {
-                      boingAudio.play()
-                      dispatch(incrementScore())
-                      dispatch(setActiveNumber(-1))
-                    }
-                  }}
-                  xs={4}
-                >
-                  <img src={i === generatedNumber ? mole : hole} key={`image-${i}`} alt={'Hole'} />
-                </Grid>
-              ))}
+              .map((_, i) => {
+                const isActive = i === generatedNumber
+                return (
+                  <Grid
+                    item
+                    key={`grid-${i}`}
+                    onClick={() => {
+                      if (isActive) {
+                        boingAudio.play()
+                        dispatch(incrementScore())
+                        dispatch(setActiveNumber(-1))
+                      }
+                    }}
+                    xs={3}
+                  >
+                    <img
+                      width="140"
+                      height="100"
+                      src={isActive ? mole : hole}
+                      key={`image-${i}`}
+                      alt={isActive ? 'Mole' : 'Hole'}
+                    />
+                  </Grid>
+                )
+              })}
           </Grid>
         </Container>
       </GameWrapper>
