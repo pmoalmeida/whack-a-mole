@@ -6,6 +6,7 @@ import { RootState } from '../../store'
 import { GAMESTEPS, Player } from '../../types'
 import { Box, Button, Grid, TextField, Typography } from '@mui/material'
 import Layout from '../Layout'
+import Difficulty from '../Difficulty'
 
 export default function PlayerSetup() {
   const player: Player = useSelector((state: RootState) => state.player)
@@ -35,6 +36,9 @@ export default function PlayerSetup() {
             margin="normal"
             fullWidth
           />
+        </Grid>
+        <Grid item xs={12}>
+          <Difficulty />
         </Grid>
         <Grid item xs={12}>
           <Button

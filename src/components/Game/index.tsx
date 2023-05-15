@@ -14,16 +14,18 @@ import { useGenerateNumber } from '../../hooks/useGenerateNumber'
 // @ts-ignore
 import boing from '../../assets/sounds/boing.mp3'
 import { useGameTime } from '../../hooks/useGameTime'
+import { GAME_DIFFICULTY } from '../../config'
 
 export default function Game() {
   const boingAudio = new Audio(boing)
   const player: Player = useSelector((state: RootState) => state.player)
+  const difficulty: GAME_DIFFICULTY = useSelector((state: RootState) => state.game.difficulty)
   const generatedNumber: number = useSelector((state: RootState) => state.game.activeNumber)
   const dispatch = useDispatch()
 
   const { runTimer, countDown } = useGameTime()
 
-  useGenerateNumber(runTimer, dispatch)
+  useGenerateNumber(runTimer, difficulty, dispatch)
 
   const seconds = String(countDown % 60).padStart(2, '0')
   const minutes = String(Math.floor(countDown / 60)).padStart(2, '0')
