@@ -24,6 +24,7 @@ describe('game', () => {
     cy.visit('https://whack-a-mole-sooty.vercel.app')
     cy.contains('PLAY').click()
     cy.get("[id='playerName']").type('Test E2E')
-    cy.contains('PLAY NOW!').click()
+
+    cy.contains('Play now!').click()
   })
 })
