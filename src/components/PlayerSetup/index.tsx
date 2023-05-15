@@ -16,12 +16,12 @@ export default function PlayerSetup() {
   return (
     <Layout>
       <Box>
-        <Typography variant="h4" paragraph>
+        <Typography variant="h4" paragraph={true}>
           What do you want to be called?
         </Typography>
       </Box>
-      <Grid container spacing={1}>
-        <Grid item xs={12}>
+      <Grid container={true} spacing={1}>
+        <Grid item={true} xs={12}>
           <TextField
             id="playerName"
             error={error}
@@ -34,15 +34,15 @@ export default function PlayerSetup() {
             variant="outlined"
             defaultValue={name}
             margin="normal"
-            fullWidth
+            fullWidth={true}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item={true} xs={12}>
           <Difficulty />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item={true} xs={12}>
           <Button
-            fullWidth
+            fullWidth={true}
             variant="contained"
             size="medium"
             onClick={() => {
@@ -58,9 +58,9 @@ export default function PlayerSetup() {
             Play now!
           </Button>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item={true} xs={12}>
           <Button
-            fullWidth
+            fullWidth={true}
             variant="contained"
             size="large"
             onClick={() => {

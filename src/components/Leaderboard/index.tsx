@@ -26,10 +26,10 @@ export default function Leaderboard() {
   useEffect(() => {
     setLoading(true)
     const getLeaderBoard = async () => {
-      const leaderboard = await fetchLeaderboard()
+      const leaderboardResults = await fetchLeaderboard()
       setLoading(false)
-      if (leaderboard.records) {
-        setLeaderboard(leaderboard.records)
+      if (leaderboardResults.records) {
+        setLeaderboard(leaderboardResults.records)
       }
     }
 
@@ -69,15 +69,15 @@ export default function Leaderboard() {
   return (
     <Layout>
       <Box>
-        <Typography variant="h2" paragraph>
+        <Typography variant="h2" paragraph={true}>
           Leaderboard
         </Typography>
       </Box>
       {loading ? <CircularProgress /> : renderLeaderboard()}
-      <Grid container spacing={1}>
-        <Grid item xs={12}>
+      <Grid container={true} spacing={1}>
+        <Grid item={true} xs={12}>
           <Button
-            fullWidth
+            fullWidth={true}
             variant="contained"
             size="large"
             onClick={() => {

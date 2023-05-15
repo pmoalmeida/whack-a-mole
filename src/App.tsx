@@ -17,8 +17,8 @@ function App() {
   const step: GAMESTEPS = useSelector((state: RootState) => state.game.step)
   const dispatch = useDispatch()
 
-  function renderStep(step: GAMESTEPS) {
-    switch (step) {
+  function renderStep(stepToRender: GAMESTEPS) {
+    switch (stepToRender) {
       case GAMESTEPS.GAME:
         return <Game />
       case GAMESTEPS.PLAYER_SETUP:
@@ -29,31 +29,27 @@ function App() {
         return (
           <Layout>
             <Box>
-              <Typography variant="h1" paragraph>
+              <Typography variant="h1" paragraph={true}>
                 Whack-a-mole!
               </Typography>
             </Box>
-            <Grid container spacing={1}>
-              <Grid item xs={12}>
+            <Grid container={true} spacing={1}>
+              <Grid item={true} xs={12}>
                 <Button
-                  fullWidth
+                  fullWidth={true}
                   variant="contained"
                   size="large"
-                  onClick={() => {
-                    dispatch(setStep(GAMESTEPS.PLAYER_SETUP))
-                  }}
+                  onClick={() => dispatch(setStep(GAMESTEPS.PLAYER_SETUP))}
                 >
                   PLAY
                 </Button>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item={true} xs={12}>
                 <Button
-                  fullWidth
+                  fullWidth={true}
                   variant="contained"
                   size="large"
-                  onClick={() => {
-                    dispatch(setStep(GAMESTEPS.LEADERBOARD))
-                  }}
+                  onClick={() => dispatch(setStep(GAMESTEPS.LEADERBOARD))}
                 >
                   LEADERBOARD
                 </Button>
